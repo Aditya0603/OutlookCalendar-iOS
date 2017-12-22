@@ -20,3 +20,10 @@ Have add Unit test cases for classes.
 
 Could not start with UIUnit test cases, as there is a learning curve for me in that, but I have started looking into how to implement
 UIUnit test cases.
+
+# Update
+
+Added Just for testing the locking beahviour
+Called eventManager objstoreEvents from two diff threads at same time first from Main thread(ex. in App delegate)
+made the first thread sleep for 20 secs but
+call from other thread only comes after first thread has woken up and released the lock

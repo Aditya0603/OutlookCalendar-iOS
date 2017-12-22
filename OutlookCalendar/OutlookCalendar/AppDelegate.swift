@@ -22,10 +22,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let uniquedateStr = DayManager().getUniqueDateStringForDate()
         let eventModel = EventModel(dictionary:[kEventName:"Lunch At Outside",kUniqueDateString:uniquedateStr,kEventStartTime:Date(),kEventEndTime : Date().addingTimeInterval(3660)])
         EventManager().storeEvents(eventModel: eventModel, forUniqueDate: uniquedateStr)
-        
+
         let dateAfterAnHour = Date().addingTimeInterval(3600)
         let eventModel2 = EventModel(dictionary:[kEventName:"Meeting At Office",kUniqueDateString:uniquedateStr,kEventStartTime:dateAfterAnHour,kEventEndTime : dateAfterAnHour.addingTimeInterval(3720)])
         EventManager().storeEvents(eventModel: eventModel2, forUniqueDate: uniquedateStr)
+        
+        // Below and above events are just example ,
+        // they will not be here these will be called from the EventsViewController
+        // where user can create events
+        
+        // Below code is to test thread safe EventManager
+        
+//        DispatchQueue(label: "com.appcoda.thread1").async {
+//            let dateAfterAnHour2 = Date().addingTimeInterval(7200)
+//            let eventModel2 = EventModel(dictionary:[kEventName:"Meeting At Office 2",kUniqueDateString:uniquedateStr,kEventStartTime:dateAfterAnHour2,kEventEndTime : dateAfterAnHour2.addingTimeInterval(3720)])
+//            EventManager().storeEvents(eventModel: eventModel2, forUniqueDate: uniquedateStr)
+//
+//        }
+//        DispatchQueue(label: "com.appcoda.thread2").async {
+//            let dateAfterAnHour2 = Date().addingTimeInterval(7200)
+//            let eventModel2 = EventModel(dictionary:[kEventName:"Meeting At Office 2",kUniqueDateString:uniquedateStr,kEventStartTime:dateAfterAnHour2,kEventEndTime : dateAfterAnHour2.addingTimeInterval(3720)])
+//            EventManager().storeEvents(eventModel: eventModel2, forUniqueDate: uniquedateStr)
+//
+//        }
+        
+        
         // Just to print the data that its coming and parsed :P
         // Not being used as of now
         YahooWeatherRequestHandler().getYahooWeatherForecastForLocation(city: "Ranchi", country: "IN") { (forecast, err) in}
